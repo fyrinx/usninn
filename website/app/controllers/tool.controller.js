@@ -1,26 +1,25 @@
 const db=require("../models");
-const Student =db.student;
+const Tools =db.tools;
 
 const Op=db.Sequelize.Op;
 
 exports.create=(req, res) => {
  
-    if (!req.body.firstName || !req.body.lastName) {
-         res.status(400).send({
-             message: "Content can not be empty!"
-         });
-     return;
-     }
-    const student={
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        onGoing: req.body.onGoing,
-        banned: false
+    if (!req.body.firstName || req.body.lastName) {
+    res.status(400).send({
+      message: "Content can not be empty!"
+    });
+    return;
+    }
+    const tool={
+        toolName: req.body.toolName,
+        toolsIn: req.body.toolsIn,
+        toolsTotal: req.body.toolsTotal
 
 
     };
 
-    Student.create(student)
+    Tools.create(tool)
     .then(data=>{
         res.send(data);
     })
@@ -31,10 +30,10 @@ exports.create=(req, res) => {
         });
     });
 };
-exports.findAll = (res) => {
+exports.findAll = (req, res) => {
 
         
-        Student.findAll()
+        Tools.findAll()
           .then(data => {
             res.send(data);
           })
@@ -49,7 +48,7 @@ exports.findAll = (res) => {
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Student.findByPk(id)
+    Tools.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -69,46 +68,46 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-  Student.update(req.body, {
+  Tools.update(req.body, {
     where: { id: id }
   })
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Student was updated successfully."
+          message: "Tools was updated successfully."
         });
       } else {
         res.send({
-          message: `Cannot update Student with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+          message: `Cannot update Tool with id=${id}. Maybe Tutorial was not found or req.body is empty!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Student with id=" + id
+        message: "Error updating Tools with id=" + id
       });
     });
 };
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Student.destroy({
+    Tools.destroy({
       where: { id: id }
     })
       .then(num => {
         if (num == 1) {
           res.send({
-            message: "Student was deleted successfully!"
+            message: "Tools was deleted successfully!"
           });
         } else {
           res.send({
-            message: `Cannot delete Student with id=${id}. Maybe student was not found!`
+            message: `Cannot delete Tool with id=${id}. Maybe student was not found!`
           });
         }
       })
       .catch(err => {
         res.status(500).send({
-          message: "Could not delete Student with id=" + id
+          message: "Could not delete Tool with id=" + id
         });
       });
 };
