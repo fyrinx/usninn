@@ -1,11 +1,11 @@
 const db=require("../models");
-const Borrow =db.borrowLists;
+const Borrow =db.borrowList;
 
 const Op=db.Sequelize.Op;
 
 exports.create=(req, res) => {
  
-    if (!req.body.firstName || req.body.lastName) {
+    if (!req.body.studentId || !req.body.toolName  || !req.body.toolId) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
@@ -15,7 +15,6 @@ exports.create=(req, res) => {
         toolName: req.body.toolName,
         studentId: req.body.studentId,
         toolId: req.body.toolId,
-        deliveredDate: req.body.deliveredDate,
         deadLineDate: req.body.deadLineDate
 
 

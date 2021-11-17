@@ -5,11 +5,11 @@ const Op=db.Sequelize.Op;
 
 exports.create=(req, res) => {
  
-    if (!req.body.firstName || req.body.lastName) {
-    res.status(400).send({
-      message: "Content can not be empty!"
-    });
-    return;
+    if (!req.body.toolName || !req.body.toolsIn ||!req.body.toolsTotal) {
+        res.status(400).send({
+            message: "Missing at least one parameter"
+        });
+        return;
     }
     const tool={
         toolName: req.body.toolName,
