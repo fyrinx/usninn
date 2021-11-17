@@ -13,10 +13,11 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded());
 const db = require("./app/models");
+
+//db.sequelize.sync();
 db.sequelize.sync({ force: true }).then(() => {
     console.log("Drop and re-sync db.");
   });
-
 // simple route
 app.get("/", (req, res) => {
   res.json({ message: "Welcome to bezkoder application." });
