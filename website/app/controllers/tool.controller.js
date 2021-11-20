@@ -31,9 +31,9 @@ exports.create=(req, res) => {
     });
 };
 exports.findAll = (req, res) => {
-
-        
-        Tools.findAll()
+    const toolName = req.query.toolName;
+    var condition = toolName ? { toolName: { [Op.iLike]: `%${toolName}%` } } : null;
+        Tools.findAll({where: condition})
           .then(data => {
             res.send(data);
           })
