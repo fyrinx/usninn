@@ -1,5 +1,5 @@
 const db=require("../models");
-const Student =db.student;
+const Student =require("../models/student");
 
 const Op=db.Sequelize.Op;
 

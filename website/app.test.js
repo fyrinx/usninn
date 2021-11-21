@@ -1,6 +1,10 @@
 const request =require('supertest');
 const app=require('./app.js');
 
+function mockSeed(){
+    
+}
+
 describe("Should get a welcome-message", () => {
 
   describe("when passed a username and password", () => {
