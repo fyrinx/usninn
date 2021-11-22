@@ -1,5 +1,5 @@
 const db=require("../models");
-const Student =require("../models/student");
+const Student =require("../models").Student;
 
 const Op=db.Sequelize.Op;
 
@@ -14,7 +14,7 @@ exports.create=(req, res) => {
     const student={
         firstName: req.body.firstName,
         lastName: req.body.lastName,
-        onGoing: req.body.onGoing,
+        email: req.body.email,
         banned: false
 
 
@@ -31,7 +31,7 @@ exports.create=(req, res) => {
         });
     });
 };
-exports.findAll = (res) => {
+exports.findAll = (req,res) => {
 
         
         Student.findAll()

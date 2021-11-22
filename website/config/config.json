@@ -6,10 +6,11 @@
         "dialect": "postgres"
     },
     "test": {
+      "database": "wishlist_api_test",
+        "dialect": "postgres",
         "username": "postgres",
-        "password": null,
-        "database": "wishlist_api_test",
-        "dialect": "postgres"
+        "password": null
+        
     },
     "production": {
       "use_env_variable": "DATABASE_URL",
