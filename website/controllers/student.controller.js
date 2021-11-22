@@ -16,13 +16,11 @@ exports.create=(req, res) => {
         lastName: req.body.lastName,
         email: req.body.email,
         banned: false
-
-
     };
 
     Student.create(student)
     .then(data=>{
-        res.send(data);
+        res.status(201).send(data);
     })
     .catch(err=>{
         res.status(500).send({
@@ -74,7 +72,7 @@ exports.update = (req, res) => {
   })
     .then(num => {
       if (num == 1) {
-        res.send({
+        res.status(204).send({
           message: "Student was updated successfully."
         });
       } else {
