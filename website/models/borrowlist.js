@@ -15,8 +15,8 @@ module.exports = (sequelize, DataTypes) => {
         as: "student"
       });
       BorrowList.hasOne(models.Tool,{
-        foreignKey: "toolId",
-        as: "tool"
+        foreignKey: "id",
+        as: "Tool"
       });
     }
   };

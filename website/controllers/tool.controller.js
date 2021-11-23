@@ -1,5 +1,5 @@
 const db=require("../models");
-const Tools =db.tools;
+const Tool =require("../models").Tool;
 
 const Op=db.Sequelize.Op;
 
@@ -19,7 +19,7 @@ exports.create=(req, res) => {
 
     };
 
-    Tools.create(tool)
+    Tool.create(tool)
     .then(data=>{
         res.send(data);
     })
@@ -31,9 +31,7 @@ exports.create=(req, res) => {
     });
 };
 exports.findAll = (req, res) => {
-    const toolName = req.query.toolName;
-    var condition = toolName ? { toolName: { [Op.iLike]: `%${toolName}%` } } : null;
-        Tools.findAll({where: condition})
+        Tool.findAll()
           .then(data => {
             res.send(data);
           })
@@ -45,10 +43,25 @@ exports.findAll = (req, res) => {
           });
       
 };
+exports.findByName = (req, res) => {
+  const toolName = req.query.toolName;
+  var condition = toolName ? { toolName: { [Op.iLike]: `%${toolName}%` } } : null;
+      Tool.findAll({where: condition})
+        .then(data => {
+          res.send(data);
+        })
+        .catch(err => {
+          res.status(500).send({
+            message:
+              err.message || "Noe feil skjedde ved å finne studentene."
+          });
+        });
+    
+};
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Tools.findByPk(id)
+    Tool.findByPk(id)
       .then(data => {
         if (data) {
           res.send(data);
@@ -68,7 +81,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
     const id = req.params.id;
 
-  Tools.update(req.body, {
+  Tool.update(req.body, {
     where: { id: id }
   })
     .then(num => {
@@ -91,7 +104,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    Tools.destroy({
+    Tool.destroy({
       where: { id: id }
     })
       .then(num => {

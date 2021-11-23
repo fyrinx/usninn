@@ -17,28 +17,32 @@ module.exports = {
         toolsIn: 3,
         toolsTotal: 3,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        description: "En liten datamaskin"
       },
       {
         toolName: "Arduino UNO",
         toolsIn: 5,
         toolsTotal: 5,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        description: "En liten mikrokontrollen"
       },
       {
         toolName: "Arduino Mega",
         toolsIn: 2,
         toolsTotal: 3,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        description: "En større mikrokontroller"
       },
       {
         toolName: "Dildo",
         toolsIn: 5,
         toolsTotal: 5,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        description: "En snasen sak man har på lur. ;)"
       },
     ],{});
     

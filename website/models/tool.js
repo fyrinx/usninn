@@ -16,7 +16,8 @@ module.exports = (sequelize, DataTypes) => {
   Tool.init({
     toolName: DataTypes.STRING,
     toolsIn: DataTypes.INTEGER,
-    toolsTotal: DataTypes.INTEGER
+    toolsTotal: DataTypes.INTEGER,
+    description: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Tool',
