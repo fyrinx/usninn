@@ -26,7 +26,7 @@ module.exports = {
         toolsTotal: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
-        description: "En liten mikrokontrollen"
+        description: "En liten mikrokontroller"
       },
       {
         toolName: "Arduino Mega",

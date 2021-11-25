@@ -80,7 +80,7 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
     const id = req.params.id;
-
+    
   Tool.update(req.body, {
     where: { id: id }
   })

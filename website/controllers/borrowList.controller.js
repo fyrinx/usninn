@@ -1,35 +1,63 @@
 const db=require("../models");
-const Borrow =db.borrowList;
-
+const Borrow =require("../models").BorrowList;
+const Student =require("../models").Student;
+const Tool = require("../models").Tool;
 const Op=db.Sequelize.Op;
 
-exports.create=(req, res) => {
- 
-    if (!req.body.studentId || !req.body.toolName  || !req.body.toolId) {
+exports.create=async (req, res) => {
+    
+    if (!req.body.studentId || !req.body.toolId) {
     res.status(400).send({
       message: "Content can not be empty!"
     });
     return;
     }
+
     const borrow={
-        toolName: req.body.toolName,
         studentId: req.body.studentId,
         toolId: req.body.toolId,
-        deadLineDate: req.body.deadLineDate
+        deadLineDate: req.body.deadLineDate,
+        itemCount: req.body.itemCount,
+        deliveredDate: req.body.deliveredDate
 
 
     };
-
+    console.log(borrow);
     Borrow.create(borrow)
     .then(data=>{
-        res.send(data);
+      //console.log(data);
+      decrementStorage(+req.body.toolId,+ req.body.itemCount);
+      res.send(data);
+        
     })
     .catch(err=>{
         res.status(500).send({
             message: 
-            err.message || "Noe feil skjedde ved å opprette student"
+            err.message || "Noe feil skjedde ved å opprette lånt objekt"
         });
     });
+};
+exports.update=async (req, res) => {
+  const id = req.params.id;
+  if (!req.body) {
+  res.status(400).send({
+    message: "Content can not be empty!"
+  });
+  return;
+  }
+  
+  Borrow.update(
+    {deliveredDate: new Date() ,
+    where: { id: id }
+  })
+  .then(incrementStorage(req.body.toolId,+ req.body.itemCount))
+  .catch(err=>{
+      res.status(500).send({
+          message: 
+          err.message || "Noe feil skjedde ved å opprette student"
+      });
+  });
+
 };
 exports.findAll = (req, res) => {
 
@@ -66,26 +94,24 @@ exports.findOne = (req, res) => {
       });
   };
 
-exports.update = (req, res) => {
-    const id = req.params.id;
-
-  Tools.update(req.body, {
-    where: { id: id }
-  })
-    .then(num => {
-      if (num == 1) {
-        res.send({
-          message: "Tools was updated successfully."
-        });
-      } else {
-        res.send({
-          message: `Cannot update Tool with id=${id}. Maybe Tutorial was not found or req.body is empty!`
-        });
-      }
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: "Error updating Tools with id=" + id
-      });
-    });
-};
+function decrementStorage(id,n){
+  
+  const req = Tool.findOne({ where: { id: id } });
+  const a=+ req.toolsIn;
+  
+  
+  const res = Tool.update(
+    {toolsIn: a-n},
+    {where: {id: id}})
+  return res;
+}
+function incrementStorage(id,n){
+  const req = Tool.findOne({ where: { id: id } });
+  const a= +req.toolsTotal;
+  
+  
+  const res =  Tool.update(
+    {toolsIn: a+n},
+    {where: {id: id}})
+  return res;
+}

@@ -17,6 +17,9 @@ module.exports = {
       toolId: {
         type: Sequelize.INTEGER
       },
+      itemCount: {
+        type: Sequelize.INTEGER
+      },
       deliveredDate: {
         type: Sequelize.DATE
       },

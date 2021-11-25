@@ -16,7 +16,6 @@ module.exports = app => {
   
     // Update a Tutorial with id
     router.put("/:id", borrows.update);
-  
-  
+
     app.use('/api/borrow', router);
   };

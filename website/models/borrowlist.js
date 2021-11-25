@@ -10,20 +10,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      BorrowList.belongsTo(models.Student, {
-        foreignKey: "studentId",
-        as: "student"
-      });
-      BorrowList.hasOne(models.Tool,{
-        foreignKey: "id",
-        as: "Tool"
-      });
+      // BorrowList.belongsTo(models.Student, {
+      //   foreignKey: "studentId",
+      // });
+      // BorrowList.hasOne(models.Tool,{
+      //   foreignKey: "id",
+      // });
     }
   };
   BorrowList.init({
-    toolName: DataTypes.STRING,
     studentId: DataTypes.INTEGER,
     toolId: DataTypes.INTEGER,
+    itemCount: DataTypes.INTEGER,
     deliveredDate: DataTypes.DATE,
     deadlineDate: DataTypes.DATE
   }, {
