@@ -80,7 +80,7 @@ exports.findOne = (req, res) => {
 
 exports.update = (req, res) => {
     const id = req.params.id;
-    
+
   Tool.update(req.body, {
     where: { id: id }
   })
@@ -101,6 +101,9 @@ exports.update = (req, res) => {
       });
     });
 };
+function updateToolNumber(id,n){
+  
+}
 exports.delete = (req, res) => {
     const id = req.params.id;
 

@@ -8,15 +8,24 @@ describe('Borrow API', () => {
                     studentId: 2,
                     toolId: 1,
                     itemCount: 1,
+                    deadlineDate: "2021-12-14"
                 })
-            //const list = await getAll();
+            const list = await getAll();
             //console.log(list.body);
-            console.log(res.statusCode);
-            //console.log(list.body.length);
+            
             expect(res.statusCode).toEqual(200);
-            //expect(list.body.length).toEqual(1);
+            expect(list.body.length).toEqual(1);
 
         })
+    it('should update the borrow', async function () {
+        const res = await request(app).put('/api/borrow/1')
+                .send({
+                    toolId:1,
+                    itemCount:1
+                })
+        expect(res.statusCode).toEqual(200);
+    })
+
 
 
     function getAll(){

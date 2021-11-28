@@ -36,9 +36,9 @@ export default new Router({
         component: () => import("./components/Tool")
       },
       {
-        path: "/students/add",
-        name: "addStudent",
-        component: () => import("./components/AddStudent")
+        path: "/tools/add",
+        name: "addTool",
+        component: () => import("./components/AddTool")
       }
   ]
 });
