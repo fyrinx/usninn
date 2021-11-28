@@ -14,6 +14,11 @@ export default new Router({
       component: () => import("./components/StudentList")
     },
     {
+      path: "/students/:id/edit",
+      name: "student-edit",
+      component: () => import("./components/EditStudent")
+    },
+    {
       path: "/students/:id",
       name: "student-details",
       component: () => import("./components/Student")

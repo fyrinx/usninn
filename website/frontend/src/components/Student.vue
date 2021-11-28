@@ -1,109 +1,86 @@
 <template>
-  <div v-if="currentTutorial" class="edit-form py-3">
-    <p class="headline">Edit Tutorial</p>
+  <div v-if="currentStudent" >
+    <p class="headline">Studentprofil</p>
 
-    <v-form ref="form" lazy-validation>
-      <v-text-field
-        v-model="currentTutorial.title"
-        :rules="[(v) => !!v || 'Title is required']"
-        label="Title"
-        required
-      ></v-text-field>
-
-      <v-text-field
-        v-model="currentTutorial.description"
-        :rules="[(v) => !!v || 'Description is required']"
-        label="Description"
-        required
-      ></v-text-field>
+    <v-card
+    class="mx-auto" tile>
+    <v-card-title>Sudent details</v-card-title>
+    
 
 
-      <v-divider class="my-5"></v-divider>
+    
+    <v-card-text>
+        
+    <p> Firstname: {{ currentStudent.firstName }} </p>
+    <p>Lastname: {{ currentStudent.lastName }} </p>
+
+    <p>Email: {{ currentStudent.email }} </p>
+      
+      
+    </v-card-text>
 
 
-      <v-btn color="error" small class="mr-2" @click="deleteTutorial">
-        Delete
+    
+    
+    <v-card-actions>
+      <v-btn
+        textcolor="teal accent-4"
+        @click=editStudent(2)
+      >
+        Edit student
       </v-btn>
+    </v-card-actions>
 
-      <v-btn color="success" small @click="updateTutorial">
-        Update
-      </v-btn>
-    </v-form>
+  </v-card>
 
-    <p class="mt-3">{{ message }}</p>
+<p class="headline">{{ currentStudent.firstName }} sin låneliste</p>
+
+<p>Her skal lista med utlån være synlig </p>
   </div>
 
   <div v-else>
-    <p>Please click on a Tutorial...</p>
+    <p>Ingen student valgt</p>
   </div>
+
+
+
+
+
+
 </template>
 
 <script>
-import TutorialDataService from "../services/TutorialDataService";
+import StudentService from "../services/StudentService";
 
 export default {
-  name: "tutorial",
+  name: "student",
   data() {
     return {
-      currentTutorial: null,
+      currentStudent: null,
       message: "",
     };
   },
   methods: {
-    getTutorial(id) {
-      TutorialDataService.get(id)
+    getStudent(id) {
+      StudentService.get(id)
         .then((response) => {
-          this.currentTutorial = response.data;
+          this.currentStudent = response.data;
           console.log(response.data);
         })
         .catch((e) => {
           console.log(e);
         });
     },
-
-    updatePublished(status) {
-      var data = {
-        id: this.currentTutorial.id,
-        title: this.currentTutorial.title,
-        description: this.currentTutorial.description,
-        published: status,
-      };
-
-      TutorialDataService.update(this.currentTutorial.id, data)
-        .then((response) => {
-          this.currentTutorial.published = status;
-          console.log(response.data);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+    editStudent(id) {
+      this.$router.push({ name: "student-edit", params: { id: id } });
     },
+   
 
-    updateTutorial() {
-      TutorialDataService.update(this.currentTutorial.id, this.currentTutorial)
-        .then((response) => {
-          console.log(response.data);
-          this.message = "The tutorial was updated successfully!";
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
-
-    deleteTutorial() {
-      TutorialDataService.delete(this.currentTutorial.id)
-        .then((response) => {
-          console.log(response.data);
-          this.$router.push({ name: "tutorials" });
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    },
+    
   },
   mounted() {
     this.message = "";
-    this.getTutorial(this.$route.params.id);
+    this.getStudent(this.$route.params.id);
   },
 };
 </script>

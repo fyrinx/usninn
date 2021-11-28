@@ -6,8 +6,8 @@ class StudentService{
     findByName(name){
         return http.get(`students?lastName=${name}`);
     }
-    get() {
-        return http.get('students');
+    get(id) {
+        return http.get(`students/${id}`);
     }
 }
 export default new StudentService();
