@@ -77,7 +77,7 @@ export default {
     },
 
     editStudent(id) {
-      this.$router.push({ name: "student-details", params: { id: id } });
+      this.$router.push({ name: "studentinfo", params: { id: id } });
     },
 
     

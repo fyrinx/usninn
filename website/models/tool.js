@@ -11,6 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Tool.hasOne(models.BorrowList,{
+        foreignKey:'toolId'
+      });
     }
   };
   Tool.init({

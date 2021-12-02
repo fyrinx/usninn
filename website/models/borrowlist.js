@@ -13,9 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // BorrowList.belongsTo(models.Student, {
       //   foreignKey: "studentId",
       // });
-      // BorrowList.hasOne(models.Tool,{
-      //   foreignKey: "id",
-      // });
+      BorrowList.belongsTo(models.Tool,{
+        foreignKey:'toolId'
+      });
+      BorrowList.belongsTo(models.Student,{
+        foreignKey:'studentId'
+      });
     }
   };
   BorrowList.init({

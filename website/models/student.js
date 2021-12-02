@@ -11,10 +11,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Student.hasMany(models.BorrowList, {
-        foreignKey: "studentId",
-        as: "studentId"
-      })
+      Student.hasOne(models.BorrowList,{
+        foreignKey:'studentId'
+      });
     }
   };
   Student.init({

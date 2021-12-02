@@ -14,7 +14,7 @@ module.exports = {
      await queryInterface.bulkInsert("Tools",[
       {
         toolName: "Raspberry Pi",
-        toolsIn: 3,
+        toolsIn: 2,
         toolsTotal: 3,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -22,7 +22,7 @@ module.exports = {
       },
       {
         toolName: "Arduino UNO",
-        toolsIn: 5,
+        toolsIn: 2,
         toolsTotal: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -38,7 +38,7 @@ module.exports = {
       },
       {
         toolName: "Dildo",
-        toolsIn: 5,
+        toolsIn: 4,
         toolsTotal: 5,
         createdAt: new Date(),
         updatedAt: new Date(),

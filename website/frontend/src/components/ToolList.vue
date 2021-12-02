@@ -19,11 +19,17 @@
           :items="tools"
           disable-pagination
           :hide-default-footer="true"
+          
         >
-          <template v-slot:[`item.actions`]="{ item }">
-            <v-icon small class="mr-2" @click="editTutorial(item.id)">mdi-pencil</v-icon>
+        
+          <template v-slot:[`item.actions`]="{ item }" >
+            
+            <v-icon small class="mr-2" @click="editTool(item.id)">mdi-pencil</v-icon>
+            <v-icon small @click="toolDetails(item.id)">info</v-icon>
             <v-icon small @click="deleteTutorial(item.id)">mdi-delete</v-icon>
+          
           </template>
+          
         </v-data-table>
 
         <v-card-actions v-if="tools.length > 0">
@@ -64,7 +70,12 @@ export default {
     refreshList() {
       this.getTools();
     },
-
+    toolDetails(id) {
+      //this.highlightClickedRow(value);
+      console.log("Tool id "+id);
+      
+      this.$router.push({ name: "tool-detail", params: { id: id } });
+    },
     searchName() {
       ToolService.findByName(this.toolName)
         .then((response) => {
@@ -77,13 +88,15 @@ export default {
     },
 
     editTool(id) {
-      this.$router.push({ name: "tools-details", params: { id: id } });
+      console.log("Tool id "+id);
+      this.$router.push({ name: "tool-edit", params: { id: id } });
     },
 
     
 
     getDisplayTool(tools) {
       return {
+        id : tools.id,
         toolName: tools.toolName,
         toolsIn: tools.toolsIn,
         toolsTotal: tools.toolsTotal,

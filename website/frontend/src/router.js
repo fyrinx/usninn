@@ -41,6 +41,11 @@ export default new Router({
         component: () => import("./components/Tool")
       },
       {
+        path: "/tools/:id/edit",
+        name: "tool-edit",
+        component: () => import("./components/EditTool")
+      },
+      {
         path: "/tools/add",
         name: "addTool",
         component: () => import("./components/AddTool")

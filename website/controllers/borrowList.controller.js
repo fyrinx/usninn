@@ -129,6 +129,52 @@ exports.findAll = (req, res) => {
           });
       
 };
+exports.findAllByStudent = (req, res) => {
+
+  const std= req.params.id;
+  console.log("test");    
+  console.log(std);  
+  Borrow.findAll({
+    where:{studentId: std},
+    include:[{
+      model: Tool,
+    }]})
+    .then(data => {
+      
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Noe feil skjedde ved å finne studentene."
+      });
+    });
+  
+
+};
+exports.findAllByTool = (req, res) => {
+
+  const ttd= req.params.id;
+  console.log("test");    
+  console.log(ttd);  
+  Borrow.findAll({
+    where:{toolId: ttd},
+    include:[{
+      model: Student,
+    }]})
+    .then(data => {
+      
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Noe feil skjedde ved å finne studentene."
+      });
+    });
+  
+
+};
 exports.findOne = (req, res) => {
     const id = req.params.id;
   

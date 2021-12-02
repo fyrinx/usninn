@@ -6,8 +6,8 @@ class ToolService{
     findByName(name){
         return http.get(`tools?toolName=${name}`);
     }
-    get() {
-        return http.get('tools');
+    get(id) {
+        return http.get(`tools/${id}`);
     }
 }
 export default new ToolService();

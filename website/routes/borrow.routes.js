@@ -9,8 +9,9 @@ module.exports = app => {
     // Retrieve all Tutorials
     router.get("/", borrows.findAll);
   
-  
-  
+    router.get("/student/:id",borrows.findAllByStudent )
+
+    router.get("/tool/:id",borrows.findAllByTool )
     // Retrieve a single Tutorial with id
     router.get("/:id", borrows.findOne);
   
