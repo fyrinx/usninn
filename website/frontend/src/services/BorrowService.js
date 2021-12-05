@@ -9,11 +9,12 @@ class BorrowService{
     getAllByTool(id){
         return http.get(`borrow/tool/${id}`);
     }
+    get(id){
+        return http.get(`borrow/${id}`);
+    }
     findByName(name){
         return http.get(`students?lastName=${name}`);
     }
-    get(id) {
-        return http.get(`students/${id}`);
-    }
+    
 }
 export default new BorrowService();

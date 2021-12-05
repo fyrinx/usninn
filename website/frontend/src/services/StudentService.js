@@ -9,5 +9,8 @@ class StudentService{
     get(id) {
         return http.get(`students/${id}`);
     }
+    add(data) {
+        return http.post("/students", data);
+    }
 }
 export default new StudentService();

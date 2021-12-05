@@ -24,7 +24,7 @@ export default new Router({
       component: () => import("./components/Student")
     },
     {
-      path: "/students/add",
+      path: "/new/student",
       name: "addStudent",
       component: () => import("./components/AddStudent")
     },
@@ -46,9 +46,22 @@ export default new Router({
         component: () => import("./components/EditTool")
       },
       {
-        path: "/tools/add",
+        path: "/new/tool",
         name: "addTool",
         component: () => import("./components/AddTool")
-      }
+      },
+    //Borrow 
+    {
+      path: "/borrows",
+      alias: "/borrows",
+      name: "borrows",
+      component: () => import("./components/BorrowList")
+    },
+    {
+      path: "/borrows/:id",
+      alias: "/borrowrelated",
+      name: "borrowrelated",
+      component: () => import("./components/Borrow")
+    },
   ]
 });

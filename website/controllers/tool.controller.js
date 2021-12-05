@@ -14,8 +14,8 @@ exports.create=(req, res) => {
     const tool={
         toolName: req.body.toolName,
         toolsIn: req.body.toolsIn,
-        toolsTotal: req.body.toolsTotal
-
+        toolsTotal: req.body.toolsTotal,
+        description: req.body.description
 
     };
 

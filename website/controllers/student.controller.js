@@ -15,7 +15,6 @@ exports.create=(req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        banned: false
     };
 
     Student.create(student)

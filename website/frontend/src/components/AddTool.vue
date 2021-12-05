@@ -1,16 +1,27 @@
 <template>
   <div class="submit-form mt-3 mx-auto">
-    <p class="headline">Add Tutorial</p>
+    <p class="headline">Add Tool</p>
 
     <div v-if="!submitted">
       <v-form ref="form" lazy-validation>
         <v-text-field
-          v-model="tool.title"
+          v-model="tool.toolName"
           :rules="[(v) => !!v || 'Navn er påkrevd!']"
           label="Navn på verktøy"
           required
         ></v-text-field>
-
+        <v-text-field
+          v-model="tool.toolsIn"
+          :rules="[(v) => !!v || 'Antall inne er påkrevd']"
+          label="Antall inne"
+          required
+        ></v-text-field>
+        <v-text-field
+          v-model="tool.toolsTotal"
+          :rules="[(v) => !!v || 'Antall totalt påkrevd']"
+          label="Antall totalt"
+          required
+        ></v-text-field>
         <v-text-field
           v-model="tool.description"
           :rules="[(v) => !!v || 'Description is required']"
@@ -19,7 +30,7 @@
         ></v-text-field>
       </v-form>
 
-      <v-btn color="primary" class="mt-3" @click="saveTutorial">Submit</v-btn>
+      <v-btn color="primary" class="mt-3" @click="saveTool">Legg til</v-btn>
     </div>
 
     <div v-else>
@@ -33,7 +44,7 @@
         </v-card-subtitle>
 
         <v-card-actions>
-          <v-btn color="success" @click="newTutorial">Add</v-btn>
+          <v-btn color="success" @click="newTool">Add</v-btn>
         </v-card-actions>
       </v-card>
     </div>
@@ -41,31 +52,34 @@
 </template>
 
 <script>
-import TutorialDataService from "../services/TutorialDataService";
+import ToolService from "../services/ToolService";
 
 export default {
-  name: "add-tutorial",
+  name: "add-tool",
   data() {
     return {
-      tutorial: {
+      tool: {
         id: null,
-        title: "",
-        description: "",
-        published: false,
+        toolName: "",
+        toolsIn:0,
+        toolsTotal:0,
+        description: ""
       },
       submitted: false,
     };
   },
   methods: {
-    saveTutorial() {
+    saveTool() {
       var data = {
-        title: this.tutorial.title,
-        description: this.tutorial.description,
+        toolName: this.tool.toolName,
+        toolsIn: this.tool.toolsIn,
+        toolsTotal: this.tool.toolsTotal,
+        description: this.tool.description,
       };
-
-      TutorialDataService.create(data)
+      console.log(data);
+      ToolService.add(data)
         .then((response) => {
-          this.tutorial.id = response.data.id;
+          this.tool.id = response.data.id;
           console.log(response.data);
           this.submitted = true;
         })
@@ -74,9 +88,9 @@ export default {
         });
     },
 
-    newTutorial() {
+    newTool() {
       this.submitted = false;
-      this.tutorial = {};
+      this.tool = {};
     },
   },
 };

@@ -9,7 +9,11 @@
         Søk
       </v-btn>
     </v-col>
-
+    <v-col cols="12" md="4">
+      <v-btn small @click="addStudent">
+        Legg til student
+      </v-btn>
+    </v-col>
     <v-col cols="12" sm="12">
       <v-card class="mx-auto" tile>
         <v-card-title>Studenter</v-card-title>
@@ -22,6 +26,7 @@
         >
           <template v-slot:[`item.actions`]="{ item }">
             <v-icon small class="mr-2" @click="editStudent(item.id)">mdi-pencil</v-icon>
+            <v-icon small @click="studentDetails(item.id)">info</v-icon>
             <v-icon small @click="deleteStudent(item.id)">mdi-delete</v-icon>
           </template>
         </v-data-table>
@@ -60,7 +65,15 @@ export default {
           console.log(e);
         });
     },
-
+    addStudent() {
+      this.$router.push({name:"addStudent"});
+    },
+    studentDetails(id) {
+      //this.highlightClickedRow(value);
+      console.log("Student id "+id);
+      
+      this.$router.push({ name: "student-details", params: { id: id } });
+    },
     refreshList() {
       this.getStudents();
     },
@@ -80,10 +93,13 @@ export default {
       this.$router.push({ name: "studentinfo", params: { id: id } });
     },
 
-    
+    removeStudent(){
+      
+    },
 
     getDisplayStudents(student) {
       return {
+        id: student.id,
         firstName: student.firstName,
         lastName: student.lastName,
         email: student.email,

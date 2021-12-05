@@ -175,10 +175,34 @@ exports.findAllByTool = (req, res) => {
   
 
 };
+exports.findAllWithTool = (req, res) => {
+
+  
+  Borrow.findAll({
+    include:[{
+      model: Tool,
+    }]})
+    .then(data => {
+      
+      res.send(data);
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Noe feil skjedde ved å finne studentene."
+      });
+    });
+  
+
+};
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
-    Borrow.findByPk(id)
+    Borrow.findByPk(id, {
+      include:[
+      {model: Tool},
+      {model: Student}]
+    })
       .then(data => {
         if (data) {
           res.send(data);

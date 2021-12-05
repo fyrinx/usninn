@@ -30,6 +30,12 @@
       >
         Endre student
       </v-btn>
+      <v-btn
+        textcolor="teal accent-4"
+        @click=editStudent(currentStudent.id)
+      >
+        Nytt lån
+      </v-btn>
     </v-card-actions>
 
   </v-card>
