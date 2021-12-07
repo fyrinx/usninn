@@ -42,7 +42,7 @@ exports.create=async (req, res) => {
       return;
     }
    
-    //console.log("B is: "+b);
+  console.log(borrow.toolId);
   Tool.update(
     {toolsIn: a-borrow.itemCount},
     {where: {id: borrow.toolId}}).catch(err=>{
@@ -84,35 +84,38 @@ exports.update=async (req, res) => {
         message: "Noe feil skjedde når verktøy-objektet hentes"
     });
     return;
-});
-  const a=+ sb.toolsIn;
-  
-  console.log("ID is "+id+" Toolid is is "+tId+" A is "+a);
-  
-  await Tool.update(
-    {toolsIn: a+req.body.itemCount},
-    {where: {id: tId}})
-    .catch(err=>{
-      res.status(500).send({
-          erro: err,
-          message: "Noe feil skjedde under oppdatering av tabellene"
-      });
-      return;
   });
+  const a=+ sb.toolsIn;
+  const sum=a+s.itemCount
+  console.log("ID is "+id+" Toolid is is "+tId+" A is "+a);
+  console.log("Loaned "+s.itemCount)
+   Tool.update(
+     {toolsIn: sum},
+     {where: {id: tId}})
+     .catch(err=>{
+       res.status(500).send({
+           erro: err,
+           message: "Noe feil skjedde under oppdatering av tabellene"
+      });
+       return;
+   });
   
+  const now= new Date();
+  //Updating borrow¨
+  console.log(now);
 
-  //Updating borrow
-  //  await Borrow.update(
-  //   {where: { id: id }},
-  //   {deliveredDate: new Date()})
-  //  .catch(err=>{
-  //      res.status(500).send({
-  //          message: 
-  //          err.message || "Noe feil skjedde ved å opprette student"
-  //     });
-  //     return;
-  //  });
-
+  Borrow.update(
+     {deliveredDate: now},
+     {where: { id: id }}).then(data=>{
+      //console.log(data);
+      res.send(data);
+    }).catch(err=>{
+        res.status(500).send({
+            message: 
+            err.message || "Noe feil skjedde ved å oppdatere lån"
+       });
+       return;
+    })
 };
 exports.findAll = (req, res) => {
 

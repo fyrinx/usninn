@@ -23,12 +23,6 @@
     <p>Ingen lån valgt</p>
     
   </div>
-
-
-
-
-
-
 </template>
 
 <script>
@@ -56,7 +50,7 @@ export default {
     },
   },
       mounted() {
-          console.log(this.$route.params.id);
+    console.log(this.$route.params.id);
     this.message = "";
     this.getBorrow(this.$route.params.id);
   },
