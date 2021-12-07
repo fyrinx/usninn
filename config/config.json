@@ -13,12 +13,13 @@
         
     },
     "production": {
+      "username": "tuislwhigldula",
+      "password": "e98ad4417657227b90c7fa33d372148ba0811991645f9b48ebba626084178b6d",
       "use_env_variable": "DATABASE_URL",
+      "host": "ec2-176-34-168-83.eu-west-1.compute.amazonaws.com",
       "dialect": "postgres",
-      "dialectOptions": {
-        "ssl": {
-          "rejectUnauthorized": false
-        }
-      }
+      "protocol": "postgres",
+      "port": "5432"
+      
     }
   }
