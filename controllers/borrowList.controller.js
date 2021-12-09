@@ -21,7 +21,6 @@ exports.create=async (req, res) => {
       const borrow={
         studentId: req.body.studentId,
         toolId: req.body.toolId,
-        itemCount: req.body.itemCount,
         //deliveredDate: "",
         deadlineDate: Date.parse(req.body.deadlineDate+"T23:59:59")
     };
@@ -35,16 +34,16 @@ exports.create=async (req, res) => {
   //console.log(s);
   const a=+ s.toolsIn;
   //console.log("A is: "+a);
-    if(borrow.itemCount>a){
+    if(a<=0){
       res.status(400).send({
-        message: "Kan ikke låne mer enn tilgjengelig"
+        message: "Utstyret er ikke tilgjengelig"
       });
       return;
     }
    
   console.log(borrow.toolId);
   Tool.update(
-    {toolsIn: a-borrow.itemCount},
+    {toolsIn: a-1},
     {where: {id: borrow.toolId}}).catch(err=>{
       res.status(500).send({
           message: "Noe feil skjedde under oppdatering av tabellene"
@@ -86,7 +85,7 @@ exports.update=async (req, res) => {
     return;
   });
   const a=+ sb.toolsIn;
-  const sum=a+s.itemCount
+  const sum=a+1
   console.log("ID is "+id+" Toolid is is "+tId+" A is "+a);
   console.log("Loaned "+s.itemCount)
    Tool.update(

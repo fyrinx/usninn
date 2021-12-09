@@ -11,7 +11,6 @@
         
     <p>Navn på låner: {{ currentBorrow.Student.studentName }} </p>
     <p>Navn på verktøy: {{ currentBorrow.Tool.toolName }} </p> 
-    <p>Antall lånt: {{ currentBorrow.itemCount }} </p>
     <p>Levert dato:<br> {{ currentBorrow.deliveredDate }} </p>
     <p>Frist dato:<br> {{ currentBorrow.deadlineDate }} </p>
     </v-card-text>

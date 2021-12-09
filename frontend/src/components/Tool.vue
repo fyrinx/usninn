@@ -70,7 +70,6 @@ export default {
       borrows: [],
       headers: [
         { text: "Navn på student", align: "start", sortable: false, value: "studentName" },
-        { text: "Antall", value: "itemCount", sortable: false },
         { text: "Levert dato", value: "deliveredDate", sortable: false },
         { text: "Leveringsfrist", value: "deadlineDate", sortable: false }
       ]
@@ -107,7 +106,6 @@ export default {
         studentId: borrow.studentId,
         toolId: borrow.toolId,
         studentName: borrow.Student.firstName+" "+borrow.Student.lastName,
-        itemCount: borrow.itemCount,
         deliveredDate: borrow.deliveredDate,
         deadlineDate: borrow.deadlineDate
       };

@@ -42,7 +42,6 @@ export default {
       title: "",
       headers: [
         { text: "Verktøynavn", align: "start", sortable: false, value: "toolName" },
-        { text: "Antall", value: "itemCount", sortable: false },
         { text: "Levert Dato", value: "deliveredDate", sortable: false },
         { text: "Frist Dato", value: "deadlineDate", sortable: false }
       ],
@@ -82,7 +81,6 @@ export default {
       return {
         id: borrow.id,
         toolName: borrow.Tool.toolName,
-        itemCount: borrow.itemCount,
         deliveredDate: borrow.deliveredDate,
         deadlineDate: borrow.deadlineDate,
       };

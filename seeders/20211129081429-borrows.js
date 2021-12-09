@@ -16,7 +16,6 @@ module.exports = {
      {
       studentId: 2,
       toolId: 1,
-      itemCount: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
@@ -24,7 +23,6 @@ module.exports = {
     {
       studentId: 1,
       toolId: 2,
-      itemCount: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
@@ -33,7 +31,6 @@ module.exports = {
     {
       studentId: 3,
       toolId: 4,
-      itemCount: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
@@ -42,7 +39,6 @@ module.exports = {
     {
       studentId: 2,
       toolId: 3,
-      itemCount: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
@@ -51,7 +47,6 @@ module.exports = {
     {
       studentId: 2,
       toolId: 2,
-      itemCount: 1,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')

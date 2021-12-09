@@ -86,7 +86,6 @@ export default {
       borrows: [],
       headers: [
         { text: "Navn på verktøy", align: "start", sortable: false, value: "toolName" },
-        { text: "Antall", value: "itemCount", sortable: false },
         { text: "Levert dato", value: "deliveredDate", sortable: false },
         { text: "Leveringsfrist", value: "deadlineDate", sortable: false }
       ]
@@ -123,7 +122,6 @@ export default {
         studentId: borrow.studentId,
         toolId: borrow.toolId,
         toolName: borrow.Tool.toolName,
-        itemCount: borrow.itemCount,
         deliveredDate: borrow.deliveredDate,
         deadlineDate: borrow.deadlineDate
       };

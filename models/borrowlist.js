@@ -24,7 +24,6 @@ module.exports = (sequelize, DataTypes) => {
   BorrowList.init({
     studentId: DataTypes.INTEGER,
     toolId: DataTypes.INTEGER,
-    itemCount: DataTypes.INTEGER,
     deliveredDate: DataTypes.DATE,
     deadlineDate: DataTypes.DATE
   }, {
