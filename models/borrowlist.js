@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   };
   BorrowList.init({
-    studentId: DataTypes.INTEGER,
+    studentId: DataTypes.BIGINT,
     toolId: DataTypes.INTEGER,
     deliveredDate: DataTypes.DATE,
     deadlineDate: DataTypes.DATE

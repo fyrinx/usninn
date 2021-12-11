@@ -12,12 +12,9 @@ module.exports = {
         type: Sequelize.STRING
       },
       studentId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       toolId: {
-        type: Sequelize.INTEGER
-      },
-      itemCount: {
         type: Sequelize.INTEGER
       },
       deliveredDate: {

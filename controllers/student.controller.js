@@ -12,6 +12,7 @@ exports.create=(req, res) => {
      return;
      }
     const student={
+        id:req.body.id,
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
