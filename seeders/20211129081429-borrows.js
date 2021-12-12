@@ -15,14 +15,14 @@ module.exports = {
    await queryInterface.bulkInsert('BorrowLists',[
      {
       studentId: 119212209202,
-      toolId: 1,
+      toolId: 14015624555,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
       },
     {
       studentId: 119212269202,
-      toolId: 2,
+      toolId: 14015624555,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
@@ -30,7 +30,7 @@ module.exports = {
     },
     {
       studentId: 119212309282,
-      toolId: 4,
+      toolId: 14015624556,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
@@ -38,7 +38,7 @@ module.exports = {
     },
     {
       studentId: 119212269202,
-      toolId: 3,
+      toolId: 14015624556,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')
@@ -46,7 +46,7 @@ module.exports = {
     },
     {
       studentId: 119212269202,
-      toolId: 2,
+      toolId: 14015624558,
       createdAt: new Date(),
       updatedAt: new Date(),
       deadlineDate: new Date('2022-3-14 22:59:59')

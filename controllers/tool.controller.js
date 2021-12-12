@@ -12,6 +12,7 @@ exports.create=(req, res) => {
         return;
     }
     const tool={
+        id: req.body.id,
         toolName: req.body.toolName,
         toolsIn: req.body.toolsIn,
         toolsTotal: req.body.toolsTotal,

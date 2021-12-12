@@ -13,6 +13,7 @@ module.exports = {
     */
      await queryInterface.bulkInsert("Tools",[
       {
+        id:14015625556,
         toolName: "Raspberry Pi",
         toolsIn: 2,
         toolsTotal: 3,
@@ -21,6 +22,7 @@ module.exports = {
         description: "En liten datamaskin"
       },
       {
+        id:14015624555,
         toolName: "Arduino UNO",
         toolsIn: 2,
         toolsTotal: 5,
@@ -29,6 +31,7 @@ module.exports = {
         description: "En liten mikrokontroller"
       },
       {
+        id:14015624556,
         toolName: "Arduino Mega",
         toolsIn: 2,
         toolsTotal: 3,
@@ -37,6 +40,7 @@ module.exports = {
         description: "En større mikrokontroller"
       },
       {
+        id:14015624558,
         toolName: "Dildo",
         toolsIn: 4,
         toolsTotal: 5,

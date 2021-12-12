@@ -15,7 +15,7 @@ module.exports = {
         type: Sequelize.BIGINT
       },
       toolId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.BIGINT
       },
       deliveredDate: {
         type: Sequelize.DATE
