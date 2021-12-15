@@ -5,8 +5,8 @@ module.exports = app => {
   
     
     router.post("/", borrows.create);
-  
-    // Retrieve all Tutorials
+    
+    router.put("/",borrows.deliver);
     router.get("/", borrows.findAllWithTool);
   
     router.get("/student/:id",borrows.findAllByStudent )
@@ -18,6 +18,8 @@ module.exports = app => {
   
     // Update a Tutorial with id
     router.put("/:id", borrows.update);
+
+    
 
     app.use('/api/borrow', router);
   };

@@ -35,7 +35,7 @@ exports.create=async (req, res) => {
   const a=+ s.toolsIn;
   //console.log("A is: "+a);
     if(a<=0){
-      res.status(400).send({
+      res.status(405).send({
         message: "Utstyret er ikke tilgjengelig"
       });
       return;
@@ -84,25 +84,24 @@ exports.update=async (req, res) => {
     });
     return;
   });
+  
   const a=+ sb.toolsIn;
-  const sum=a+1
-  console.log("ID is "+id+" Toolid is is "+tId+" A is "+a);
-  console.log("Loaned "+s.itemCount)
-   Tool.update(
-     {toolsIn: sum},
-     {where: {id: tId}})
-     .catch(err=>{
-       res.status(500).send({
-           erro: err,
-           message: "Noe feil skjedde under oppdatering av tabellene"
-      });
-       return;
-   });
+  const sum=a+1;
+  if(sum>=sb.toolsTotal) {
+    res.status(405).send({
+      message: "Allerede fullt med utstyr. Kontakt admin"
+    });
+    return;
+  }
+
+  //console.log("ID is "+id+" Toolid is is "+tId+" A is "+a);
+  //console.log("Loaned "+s.itemCount)
+   
   
   const now= new Date();
   //Updating borrow¨
-  console.log(now);
-
+  //console.log(now);
+  
   Borrow.update(
      {deliveredDate: now},
      {where: { id: id }}).then(data=>{
@@ -116,6 +115,81 @@ exports.update=async (req, res) => {
        return;
     })
 };
+
+exports.deliver =async (req, res) => {
+  const sId=req.body.studentId;
+  const tId=req.body.toolId;
+  if (!req.body) {
+    res.status(400).send({
+      message: "Kan ikke være tom!"
+    });
+    return;
+    }
+  const one=await Borrow.findOne({
+    where: {
+      studentId: sId,
+      toolId: tId,
+      deliveredDate: null
+    },
+    include:[{
+      model: Tool,
+      
+    }],
+    order: [
+      ['createdAt','asc'],
+      ['id','asc'],
+    ]
+
+  }).catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Noe feil skjedde ved å finne låneobjekt."
+        
+
+    });
+    return;
+  });
+  
+  const tIn=one.Tool.toolsIn;
+  const tTotal=one.Tool.toolsTotal;
+  console.log(tIn+" "+tTotal);
+
+   if(one.Tool.toolsIn+1>=one.Tool.toolsTotal) {
+     res.status(405).send({
+       message: "Allerede fullt med utstyr. Kontakt admin"
+     });
+     return;
+   }
+
+  Tool.update(
+    {toolsIn: tIn+1},
+    {where: {id: tId}})
+    .catch(err=>{
+      res.status(500).send({
+          erro: err,
+          message: "Noe feil skjedde under oppdatering av tabellene"
+     });
+      return;
+  });
+
+const now= Date.now();
+ 
+  Borrow.update(
+    {deliveredDate: now},
+    {where: { id: one.id }}).
+    then(data => {
+        console.log(data);
+        res.send(data);
+      }).catch(err=>{
+       res.status(500).send({
+           message: 
+           err.message || "Noe feil skjedde ved å oppdatere lån"
+      });
+      return;
+   })
+
+}
+
 exports.findAll = (req, res) => {
 
         
