@@ -6,23 +6,79 @@ const Op=db.Sequelize.Op;
 
 
 
+
 exports.create=async (req, res) => {
     
-    if (!req.body.studentId || !req.body.toolId) {
-    res.status(400).send({
-      message: "Content can not be empty!"
+  if (!req.body.studentId || !req.body.toolId) {
+  res.status(400).send({
+    message: "Content can not be empty!"
+  });
+  return;
+  }
+
+  //Setting Dates
+
+  
+    const borrow={
+      studentId: req.body.studentId,
+      toolId: req.body.toolId,
+      //deliveredDate: "",
+      deadlineDate: Date.parse(req.body.deadlineDate+"T23:59:59")
+  };
+  console.log(borrow.deadlineDate);
+  const s =await Tool.findOne({ where: { id: borrow.toolId } }).catch(err=>{
+  res.status(500).send({
+      message: "Noe feil skjedde når verktøy-objektet hentes"
+  });
+  return;
+});
+//console.log(s);
+const a=+ s.toolsIn;
+//console.log("A is: "+a);
+  if(a<=0){
+    res.status(405).send({
+      message: "Utstyret er ikke tilgjengelig"
     });
     return;
-    }
+  }
+ 
+console.log(borrow.toolId);
+Tool.update(
+  {toolsIn: a-1},
+  {where: {id: borrow.toolId}}).catch(err=>{
+    res.status(500).send({
+        message: "Noe feil skjedde under oppdatering av tabellene"
+    });
+    return;
+});
+Borrow.create(borrow)
+  .then(data=>{
+    //console.log(data);
+    res.send(data);
+  })
+  .catch(err=>{
+      res.status(500).send({
+          message: 
+          err.message || "Noe feil skjedde ved å opprette lånt objekt"
+      });
+  });
+};
+
+exports.createByLink=async (req, res) => {
+    
+    //Finner de ulike ID fra parametre.
+    const studentId=req.params.id.substring(0,12);
+    const toolId= req.params.id.substring(12,23);
 
     //Setting Dates
 
-    
+    var date = new Date();
+    date.setDate(date.getDate()+30);
       const borrow={
-        studentId: req.body.studentId,
-        toolId: req.body.toolId,
+        studentId: studentId,
+        toolId: toolId,
         //deliveredDate: "",
-        deadlineDate: Date.parse(req.body.deadlineDate+"T23:59:59")
+        deadlineDate: date
     };
     console.log(borrow.deadlineDate);
     const s =await Tool.findOne({ where: { id: borrow.toolId } }).catch(err=>{
@@ -164,6 +220,80 @@ exports.deliver =async (req, res) => {
   Tool.update(
     {toolsIn: tIn+1},
     {where: {id: tId}})
+    .catch(err=>{
+      res.status(500).send({
+          erro: err,
+          message: "Noe feil skjedde under oppdatering av tabellene"
+     });
+      return;
+  });
+
+const now= Date.now();
+ 
+  Borrow.update(
+    {deliveredDate: now},
+    {where: { id: one.id }}).
+    then(data => {
+        console.log(data);
+        res.send(data);
+      }).catch(err=>{
+       res.status(500).send({
+           message: 
+           err.message || "Noe feil skjedde ved å oppdatere lån"
+      });
+      return;
+   })
+
+}
+
+exports.deliverById =async (req, res) => {
+  const studentId=req.params.id.substring(0,12);
+    const toolId= req.params.id.substring(12,23);
+  if (!req.body) {
+    res.status(400).send({
+      message: "Kan ikke være tom!"
+    });
+    return;
+    }
+  const one=await Borrow.findOne({
+    where: {
+      studentId: studentId,
+      toolId: toolId,
+      deliveredDate: null
+    },
+    include:[{
+      model: Tool,
+      
+    }],
+    order: [
+      ['createdAt','asc'],
+      ['id','asc'],
+    ]
+
+  }).catch(err => {
+    res.status(500).send({
+      message:
+        err.message || "Noe feil skjedde ved å finne låneobjekt."
+        
+
+    });
+    return;
+  });
+  
+  const tIn=one.Tool.toolsIn;
+  const tTotal=one.Tool.toolsTotal;
+  console.log(tIn+" "+tTotal);
+
+   if(one.Tool.toolsIn+1>=one.Tool.toolsTotal) {
+     res.status(405).send({
+       message: "Allerede fullt med utstyr. Kontakt admin"
+     });
+     return;
+   }
+
+  Tool.update(
+    {toolsIn: tIn+1},
+    {where: {id: toolId}})
     .catch(err=>{
       res.status(500).send({
           erro: err,

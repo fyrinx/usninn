@@ -12,7 +12,8 @@ module.exports = app => {
     router.get("/student/:id",borrows.findAllByStudent )
 
     router.get("/tool/:id",borrows.findAllByTool )
-    
+    router.get("/add/:id", borrows.createByLink);
+    router.get("/deliver/:id", borrows.deliverById);
     // Retrieve a single Tutorial with id
     router.get("/:id", borrows.findOne);
   
