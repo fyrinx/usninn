@@ -13,7 +13,7 @@
     "db:reset": "npx sequelize-cli db:drop && npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all",
     "db:create:test": "cross-env NODE_ENV=test npx sequelize-cli db:create",
     "heroku:reset": "heroku pg:reset DATABASE_URL", 
-    "heroku:createdb": "cross-env NODE_ENV=production heroku npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "heroku:createdb": "cross-env NODE_ENV=production heroku run npx sequelize-cli db:create && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
     
 
   },

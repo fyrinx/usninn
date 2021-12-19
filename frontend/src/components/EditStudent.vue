@@ -70,7 +70,7 @@ export default {
       StudentService.update(this.currentTutorial.id, this.currentTutorial)
         .then((response) => {
           console.log(response.data);
-          this.message = "The tutorial was updated successfully!";
+          this.message = "Student oppdatert!";
         })
         .catch((e) => {
           console.log(e);
@@ -78,10 +78,10 @@ export default {
     },
 
     deleteStudent() {
-      StudentService.delete(this.currentTutorial.id)
+      StudentService.delete(this.currentStudent.id)
         .then((response) => {
           console.log(response.data);
-          this.$router.push({ name: "tutorials" });
+          this.$router.push({ name: "" });
         })
         .catch((e) => {
           console.log(e);

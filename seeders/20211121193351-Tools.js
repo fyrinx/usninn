@@ -41,12 +41,12 @@ module.exports = {
       },
       {
         id:14015624558,
-        toolName: "Dildo",
+        toolName: "Hammer",
         toolsIn: 4,
         toolsTotal: 5,
         createdAt: new Date(),
         updatedAt: new Date(),
-        description: "En snasen sak man har på lur. ;)"
+        description: "En snasen sak man har på lur."
       },
     ],{});
     

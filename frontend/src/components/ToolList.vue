@@ -100,6 +100,9 @@ export default {
       console.log("Tool id "+id);
       this.$router.push({ name: "tool-edit", params: { id: id } });
     },
+    deleteTool() {
+
+    },
 
     
 

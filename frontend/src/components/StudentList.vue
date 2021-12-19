@@ -91,10 +91,10 @@ export default {
     },
 
     editStudent(id) {
-      this.$router.push({ name: "studentinfo", params: { id: id } });
+      this.$router.push({ name: "student-edit", params: { id: id } });
     },
 
-    removeStudent(){
+    deleteStudent(){
       
     },
 

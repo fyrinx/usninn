@@ -16,5 +16,6 @@ class ToolService{
     add(data) {
         return http.post("/tools", data);
     }
+    
 }
 export default new ToolService();

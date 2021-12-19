@@ -39,7 +39,6 @@ exports.findAll = (req, res) => {
           where: condition
         })
           .then(data => {
-            console.log(data);
             res.send(data);
           })
           .catch(err => {
@@ -94,9 +93,7 @@ exports.update = (req, res) => {
       });
     });
 };
-function updateToolNumber(id,n){
-  
-}
+
 exports.delete = (req, res) => {
     const id = req.params.id;
 
