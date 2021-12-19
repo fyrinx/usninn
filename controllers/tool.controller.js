@@ -32,8 +32,14 @@ exports.create=(req, res) => {
     });
 };
 exports.findAll = (req, res) => {
-        Tool.findAll()
+  const toolName=req.query.toolName;
+  
+  var condition = toolName ? { toolName: { [Op.iLike]: `%${toolName}%` } } : null;
+        Tool.findAll({
+          where: condition
+        })
           .then(data => {
+            console.log(data);
             res.send(data);
           })
           .catch(err => {
@@ -44,21 +50,7 @@ exports.findAll = (req, res) => {
           });
       
 };
-exports.findByName = (req, res) => {
-  const toolName = req.query.toolName;
-  var condition = toolName ? { toolName: { [Op.iLike]: `%${toolName}%` } } : null;
-      Tool.findAll({where: condition})
-        .then(data => {
-          res.send(data);
-        })
-        .catch(err => {
-          res.status(500).send({
-            message:
-              err.message || "Noe feil skjedde ved å finne studentene."
-          });
-        });
-    
-};
+
 exports.findOne = (req, res) => {
     const id = req.params.id;
   
@@ -131,3 +123,4 @@ exports.delete = (req, res) => {
 exports.deleteAll = (req, res) => {
   
 };
+

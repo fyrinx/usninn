@@ -1,7 +1,7 @@
 <template>
   <v-row align="center" class="list px-3 mx-auto">
     <v-col cols="12" md="8">
-      <v-text-field v-model="title" label="Søk etter navn"></v-text-field>
+      <v-text-field v-model="name" label="Søk etter navn"></v-text-field>
     </v-col>
 
     <v-col cols="12" md="4">
@@ -45,7 +45,8 @@ export default {
   data() {
     return {
       students: [],
-      title: "",
+      
+      name: "",
       headers: [
         { text: "Fornavn", align: "start", sortable: false, value: "firstName" },
         { text: "Etternavn", value: "lastName", sortable: false },
@@ -79,9 +80,9 @@ export default {
     },
 
     searchName() {
-      StudentService.findByName(this.lastName)
+      StudentService.findByName(this.name)
         .then((response) => {
-          this.studentss = response.data.map(this.getDisplayStudents);
+          this.students = response.data.map(this.getDisplayStudents);
           console.log(response.data);
         })
         .catch((e) => {

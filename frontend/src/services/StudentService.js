@@ -4,7 +4,7 @@ class StudentService{
         return http.get('students');
     }
     findByName(name){
-        return http.get(`students?lastName=${name}`);
+        return http.get(`students?name=${name}`);
     }
     get(id) {
         return http.get(`students/${id}`);

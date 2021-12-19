@@ -1,9 +1,15 @@
 <template>
   <div class="submit-form mt-3 mx-auto">
-    <p class="headline">Add Tool</p>
+    <p class="headline">Legg til verktøy</p>
 
     <div v-if="!submitted">
       <v-form ref="form" lazy-validation>
+        <v-text-field
+          v-model="tool.id"
+          :rules="[(v) => !!v || 'Id er påkrevd!']"
+          label="ID på verktøy"
+          required
+        ></v-text-field>
         <v-text-field
           v-model="tool.toolName"
           :rules="[(v) => !!v || 'Navn er påkrevd!']"
@@ -30,7 +36,7 @@
         ></v-text-field>
       </v-form>
 
-      <v-btn color="primary" class="mt-3" @click="saveTool">Legg til</v-btn>
+      <v-btn color="red" elevation="2" @click="saveTool">Legg til</v-btn>
     </div>
 
     <div v-else>
@@ -59,7 +65,7 @@ export default {
   data() {
     return {
       tool: {
-        id: null,
+        id: "",
         toolName: "",
         toolsIn:0,
         toolsTotal:0,
@@ -71,6 +77,7 @@ export default {
   methods: {
     saveTool() {
       var data = {
+        id: this.tool.id,
         toolName: this.tool.toolName,
         toolsIn: this.tool.toolsIn,
         toolsTotal: this.tool.toolsTotal,

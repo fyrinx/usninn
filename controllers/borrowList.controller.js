@@ -181,6 +181,7 @@ exports.deliver =async (req, res) => {
     });
     return;
     }
+    
   const one=await Borrow.findOne({
     where: {
       studentId: sId,
@@ -382,14 +383,23 @@ exports.findAllByTool = (req, res) => {
 
 };
 exports.findAllWithTool = (req, res) => {
-
+  const name=req.query.search;
+  var tCondition = name ? {toolName: { [Op.iLike]: `%${name}%` } } : null;
+  var sCondition = name ? {[Op.or]: [{firstName: { [Op.iLike]: `%${name}%` } },{lastName: { [Op.iLike]: `%${name}%` } }]} :null;
   
   Borrow.findAll({
-    include:[{
-      model: Tool,
-    }]})
-    .then(data => {
+    include:[
+      {model: Tool,
+      attributes: ['toolName'],
+    where: tCondition},
+
+      {model: Student,
       
+      attributes: ['firstName','lastName']
+  }],
+})
+    .then(data => {
+      //console.log(data);
       res.send(data);
     })
     .catch(err => {

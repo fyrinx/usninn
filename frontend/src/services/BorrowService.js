@@ -13,7 +13,7 @@ class BorrowService{
         return http.get(`borrow/${id}`);
     }
     findByName(name){
-        return http.get(`students?lastName=${name}`);
+        return http.get(`borrow?search=${name}`);
     }
     
 }

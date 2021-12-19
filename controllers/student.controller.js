@@ -30,9 +30,12 @@ exports.create=(req, res) => {
     });
 };
 exports.findAll = (req,res) => {
-
+  const name=req.query.name;
+  
+  var condition = name ? {[Op.or]: [{firstName: { [Op.iLike]: `%${name}%` } },{lastName: { [Op.iLike]: `%${name}%` } }]} : null;
+  
         
-        Student.findAll()
+        Student.findAll({where: condition})
           .then(data => {
             res.send(data);
           })

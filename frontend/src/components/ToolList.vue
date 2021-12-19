@@ -1,7 +1,7 @@
 <template>
   <v-row align="center" class="list px-3 mx-auto">
     <v-col cols="12" md="8">
-      <v-text-field v-model="title" label="Search by Title"></v-text-field>
+      <v-text-field v-model="toolName" label="Search by Tool name"></v-text-field>
     </v-col>
 
     <v-col cols="12" md="4">
@@ -9,7 +9,11 @@
         Søk
       </v-btn>
     </v-col>
-
+    <v-col cols="12" md="4">
+      <v-btn small @click="addTool">
+        Legg til verktøy
+      </v-btn>
+    </v-col>
     <v-col cols="12" sm="12">
       <v-card class="mx-auto" tile>
         <v-card-title>Utstyr</v-card-title>
@@ -46,7 +50,7 @@ export default {
   data() {
     return {
       tools: [],
-      title: "",
+      toolName: "",
       headers: [
         { text: "Navn på utstyr", align: "start", sortable: false, value: "toolName" },
         { text: "Antall inne", value: "toolsIn", sortable: false },
@@ -77,16 +81,21 @@ export default {
       this.$router.push({ name: "tool-detail", params: { id: id } });
     },
     searchName() {
+
+      console.log(this.toolName);
       ToolService.findByName(this.toolName)
         .then((response) => {
-          this.tools = response.data.map(this.getDisplayTools);
           console.log(response.data);
+          this.tools = response.data.map(this.getDisplayTool);
+          
         })
         .catch((e) => {
           console.log(e);
         });
     },
-
+    addTool() {
+      this.$router.push({name:"addTool"});
+    },
     editTool(id) {
       console.log("Tool id "+id);
       this.$router.push({ name: "tool-edit", params: { id: id } });

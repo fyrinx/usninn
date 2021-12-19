@@ -5,6 +5,12 @@
     <div v-if="!submitted">
       <v-form ref="form" lazy-validation>
         <v-text-field
+          v-model="student.id"
+          :rules="[(v) => !!v || 'Id er påkrevd! ']"
+          label="Id på student"
+          required
+        ></v-text-field>
+        <v-text-field
           v-model="student.firstName"
           :rules="[(v) => !!v || 'Fornavn er påkrevd!']"
           label="Fornavn på student"
@@ -53,7 +59,7 @@ export default {
   data() {
     return {
       student: {
-        id: null,
+        id: "",
         firstName: "",
         lastName: "",
         email: ""
@@ -68,6 +74,7 @@ export default {
   methods: {
     saveStudent() {
       var data = {
+        id: this.student.id,
         firstName: this.student.firstName,
         lastName: this.student.lastName,
         email: this.student.email,

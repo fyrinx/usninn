@@ -1,7 +1,7 @@
 <template>
   <v-row align="center" class="list px-3 mx-auto">
     <v-col cols="12" md="8">
-      <v-text-field v-model="title" label="Søk etter lån"></v-text-field>
+      <v-text-field v-model="name" label="Søk etter lån"></v-text-field>
     </v-col>
 
     <v-col cols="12" md="4">
@@ -19,6 +19,7 @@
           :items="borrows"
           disable-pagination
           :hide-default-footer="true"
+          @click:row="borrowDetails"
         >
           <template v-slot:[`item.actions`]="{ item }">
             <v-icon small @click="borrowDetails(item.id)">info</v-icon>
@@ -39,9 +40,10 @@ export default {
   data() {
     return {
       borrows: [],
-      title: "",
+      name: "",
       headers: [
         { text: "Verktøynavn", align: "start", sortable: false, value: "toolName" },
+        { text: "Navn",sortable: false,value: "name"},
         { text: "Levert Dato", value: "deliveredDate", sortable: false },
         { text: "Frist Dato", value: "deadlineDate", sortable: false }
       ],
@@ -58,16 +60,17 @@ export default {
           console.log(e);
         });
     },
-    borrowDetails(id) {
+    borrowDetails(value) {
+      
       //this.highlightClickedRow(value);
-      this.$router.push({ name: "borrow-details", params: { id: id } });
+      this.$router.push({ name: "borrowrelated", params: { id: value.id } });
     },
     refreshList() {
       this.getBorrows();
     },
 
     searchBorrow() {
-      BorrowService.findByName()
+      BorrowService.findByName(this.name)
         .then((response) => {
           this.borrows = response.data.map(this.getDisplayBorrow);
           console.log(response.data);
@@ -81,6 +84,7 @@ export default {
       return {
         id: borrow.id,
         toolName: borrow.Tool.toolName,
+        name: borrow.Student.firstName +" " +borrow.Student.lastName,
         deliveredDate: borrow.deliveredDate,
         deadlineDate: borrow.deadlineDate,
       };

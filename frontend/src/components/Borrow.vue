@@ -9,7 +9,7 @@
  
     <v-card-text>
         
-    <p>Navn på låner: {{ currentBorrow.Student.studentName }} </p>
+    <p>Navn på låner: {{ currentBorrow.Student.firstName }} {{ currentBorrow.Student.lastName }} </p>
     <p>Navn på verktøy: {{ currentBorrow.Tool.toolName }} </p> 
     <p>Levert dato:<br> {{ currentBorrow.deliveredDate }} </p>
     <p>Frist dato:<br> {{ currentBorrow.deadlineDate }} </p>
