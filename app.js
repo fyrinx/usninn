@@ -1,13 +1,10 @@
 const express= require('express'); 
 const cors =require('cors');
 
-
+const path = require('path');
 
 const app = express();
 
-var corsOptions = {
-  origin: "http://localhost:8081"
-};
 
 app.use(cors());
 
@@ -21,10 +18,11 @@ const db = require("./models");
 //    console.log("Drop and re-sync db.");
 //  });
 // simple route
-app.get("/", (req, res) => {
-  res.json({ message: "USN-låneservice!" });
-});
 
+app.use(express.static(__dirname + '/dist'));
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
 require("./routes/student.routes")(app);
 require("./routes/borrow.routes")(app);
 require("./routes/tool.routes")(app);

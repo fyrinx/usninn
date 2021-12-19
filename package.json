@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "dStart": "node server.js && /frontend/build.sh",
     "production": "cross-env NODE_ENV=production node server.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
     "pretest": "cross-env NODE_ENV=test npm run db:reset",

@@ -6,10 +6,15 @@ Vue.use(Router);
 export default new Router({
   mode: "history",
   routes: [
-      //Students
     {
-      path: "/students",
-      alias: "/students",
+        path: "/",
+        alias: "/index/",
+        name: "index",
+        component: () => import("./components/Index")
+    },
+    {
+      path: "/students/",
+      alias: "/students/",
       name: "students",
       component: () => import("./components/StudentList")
     },
@@ -30,7 +35,7 @@ export default new Router({
     },
     //Tools
     {
-        path: "/tools",
+        path: "/tools/",
         alias: "/tools",
         name: "tools",
         component: () => import("./components/ToolList")
@@ -41,12 +46,12 @@ export default new Router({
         component: () => import("./components/Tool")
       },
       {
-        path: "/tools/:id/edit",
+        path: "/tools/:id/edit/",
         name: "tool-edit",
         component: () => import("./components/EditTool")
       },
       {
-        path: "/new/tool",
+        path: "/new/tool/",
         name: "addTool",
         component: () => import("./components/AddTool")
       },
